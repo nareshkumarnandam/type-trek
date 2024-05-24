@@ -1,0 +1,10 @@
+.blogDisplay{
+    position: relative;
+    top: 80px;
+    /* width: 100%; */
+    text-align: center;
+    padding: 2rem;
+}
+.blogCard{
+    width: 300px;
+}
