@@ -1,0 +1,52 @@
+.postDisplay{
+    position: relative;
+    top: 80px;
+    /* width: 100%; */
+    text-align: center;
+    padding:  2rem 15rem;
+}
+.postDisplay{
+    text-transform: capitalize;
+}
+.extraInfo {
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4rem;
+    align-items: center;
+    font-size: 0.8rem;
+  }
+  .categoryandtime {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+    gap: 5px;
+  }
+  .categoryandtime .category {
+    margin: 0;
+    background-color: rgb(43, 43, 43);
+    color: white;
+    padding: 2px 5px;
+    text-align: center;
+    border-radius: 3px;
+    text-transform: capitalize;
+  }
+  .timeCreated {
+    background-color: transparent;
+    color: gray;
+    font-size: 0.7rem;
+  }
+  .timeCreated svg {
+    position: relative;
+    top: 3px;
+    font-size: 0.9rem;
+  }
+  .thumbnail{
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+  }
+  .description{
+    text-align: left;
+  }

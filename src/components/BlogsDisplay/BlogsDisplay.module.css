@@ -1,10 +1,107 @@
-.blogDisplay{
-    position: relative;
-    top: 80px;
-    /* width: 100%; */
-    text-align: center;
-    padding: 2rem;
+.blogDisplay {
+  position: relative;
+  top: 80px;
+  /* width: 100%; */
+  text-align: center;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  gap: 20px;
 }
-.blogCard{
-    width: 300px;
+.blogCard {
+  width: 230px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-evenly; */
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  float: left;
+  transition: box-shadow .3s;
+}
+.blogCard:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+.blogimage {
+  width: 260px;
+  height: 50%;
+  object-fit: cover;
+}
+.blogimage img {
+  width: 90%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  object-position: center;
+}
+.postInfo {
+  height: 33%;
+  width: 95%;
+  margin: 5px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+.postInfo h3 {
+  text-align: left;
+  width: 100%;
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: auto;
+}
+.postInfo h3,
+.postInfo p {
+  margin: 0;
+}
+.description {
+  text-align: left;
+  font-size: 0.8rem;
+  /* overflow-wrap: break-word; */
+  background-color: transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 80%;
+}
+.noData {
+  width: 100%;
+}
+.extraInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  font-size: 0.8rem;
+}
+.categoryandtime {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+  gap: 5px;
+}
+.categoryandtime .category {
+  margin: 0;
+  background-color: rgb(43, 43, 43);
+  color: white;
+  padding: 2px 5px;
+  text-align: center;
+  border-radius: 3px;
+  text-transform: capitalize;
+}
+.timeCreated {
+  background-color: transparent;
+  color: gray;
+  font-size: 0.7rem;
+}
+.timeCreated svg {
+  position: relative;
+  top: 3px;
+  font-size: 0.9rem;
 }

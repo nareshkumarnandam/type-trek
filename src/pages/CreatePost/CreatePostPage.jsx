@@ -37,24 +37,41 @@ const CreatePostPage = ({posts, setPosts}) => {
     // console.log(value);
     // console.log(posts);
 
+    useEffect(() => {
+      localStorage.setItem('posts', JSON.stringify(posts));
+    }, [posts]);
+  
+    useEffect(() => {
+      const storedPosts = localStorage.getItem('posts');
+      if (storedPosts) {
+        setPosts(JSON.parse(storedPosts));
+      }
+    }, []);
+
     
 
     function handleUpload(){
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
         const newPost = {
-            id: posts.length,
-            title: titleInput,
-            category,
-            content: value,
-            file,
-          };
-          setPosts([...posts, newPost]);
-          // reset the state values
-          setTitleInput('');
-          setCategory('');
-          setValue('');
-          setFile('');
-          setToastMessage('Post created successfully!');
-          
+          id: posts.length,
+          title: titleInput,
+          category,
+          content: value,
+          file: base64String,
+          createdAt: Date.now(),
+        };
+        setPosts([...posts, newPost]);
+        localStorage.setItem('posts', JSON.stringify(posts));
+        // reset the state values
+        setTitleInput('');
+        setCategory('');
+        setValue('');
+        setFile('');
+        setToastMessage('Post created successfully!');
+      };
+      reader.readAsDataURL(file);
     }
 
     useEffect(() => {
@@ -72,7 +89,7 @@ const CreatePostPage = ({posts, setPosts}) => {
               });
             }, 200);
           }
-      }, [toastMessage, history]);
+      }, [toastMessage]);
     console.log(posts);
 
   return (
@@ -82,7 +99,7 @@ const CreatePostPage = ({posts, setPosts}) => {
         <h1>Create new post</h1>
         <div className={Style.postDetails}>
 
-        <input type='text' placeholder='Title' className={Style.titleInput} onChange={(e) => setTitleInput(e.target.value)} value={titleInput} />
+        <input type='text' placeholder='Title' maxLength='20' className={Style.titleInput} onChange={(e) => setTitleInput(e.target.value)} value={titleInput} />
             <select onChange={(e) => setCategory(e.target.value)} className={Style.select}>
                 <option value='uncategorized'>Uncategorized</option>
                 <option value='education'>Education</option>
@@ -96,7 +113,7 @@ const CreatePostPage = ({posts, setPosts}) => {
         <ReactQuill className={Style.quill}  modules={modules} theme="snow"  onChange={setValue} placeholder="Start writing your blog..." />
 
         </div>
-        <input onChange={(e) => setFile(e.target.files[0])} className={Style.fileInput} type='file' accept='png, jpg, jpeg' />
+        <input onChange={(e) => setFile(e.target.files[0])} className={Style.fileInput} type='file' accept='png, jpg, jpeg, mp4' />
         <button onClick={() => handleUpload()} className={Style.postBtn} type='submit'>
             Post
         </button>
