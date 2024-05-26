@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# VBlog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+VBlog is a blog website built using React.js. It allows users to create, view, edit, and delete blog posts. The website also displays the duration since each post was uploaded and shows the month, date, and year for every post on the post page.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Create Post**: Users can create new blog posts by filling out a form with a title, category, content, and optional image upload.
+- **View Post**: Users can view individual blog posts to read the content and see details such as the author, category, and upload date.
+- **Edit Post**: Users can edit existing blog posts to update the title, category, content, and image.
+- **Delete Post**: Users can delete blog posts they no longer wish to keep.
+- **Upload Date Duration**: The website displays the duration since each post was uploaded, indicating how long ago the post was created.
+- **Post Page Date Format**: On the post page, the website shows the month, date, and year for every post, providing additional context for readers.
+- **Toast Notifications**: Utilizes React-Toastify for displaying toast notifications.
+- **Page Loader Animations**: Implements loader animations using various libraries for a better user experience.
+- **Text Editor**: Implements Quill.js editor for rich text editing in the create and edit post components.
 
-### `npm start`
+## Database
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The database for VBlog is stored in the browser's localStorage. This allows for easy data persistence and retrieval without the need for server-side databases or APIs.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **React.js**: Frontend JavaScript library for building user interfaces.
+- **HTML/CSS**: Markup and styling languages for structuring and designing the website.
+- **localStorage**: Browser-based storage mechanism for storing key-value pairs locally.
+- **React Router**: Library for handling navigation and routing within a React application.
+- **React-Toastify**: Library for adding toast notifications to React applications.
+- **Loader Animations**: Utilizes various libraries for implementing page loader animations.
+- **Quill.js**: Powerful rich text editor library used for creating and editing blog post content.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+To run VBlog locally on your machine, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository to your local machine.
+2. Navigate to the project directory in your terminal.
+3. Install dependencies by running `npm install`.
+4. Start the development server with `npm start`.
+5. Open your web browser and visit `http://localhost:3000` to view the website.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Create a new post by clicking on the "Create Post" button and filling out the form.
+- View individual posts by clicking on their titles in the post list.
+- Edit existing posts by clicking on the "Edit" button on the post page.
+- Delete posts by clicking on the "Delete" button on the post page.
 
-### `npm run eject`
+## Live Demo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Check out the live demo [here](https://type-trek.vercel.app/).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Images
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Screenshot 1](../type-trek/src/assets/Screenshot%20(42).png)
+![Screenshot 2](../type-trek/src/assets/Screenshot%20(43).png)
+![Screenshot 3](../type-trek/src/assets/Screenshot%20(44).png)
+![Screenshot 4](../type-trek/src/assets/Screenshot%20(45).png)
+![Screenshot 5](../type-trek/src/assets/Screenshot%20(46).png)
+![Screenshot 6](../type-trek/src/assets/Screenshot%20(47).png)
+![Screenshot 7](../type-trek/src/assets/Screenshot%20(48).png)
+![Screenshot 8](../type-trek/src/assets/Screenshot%20(49).png)
+![Screenshot 9](../type-trek/src/assets/Screenshot%20(50).png)
+![Screenshot 10](../type-trek/src/assets/Screenshot%20(51).png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Contributions to VBlog are welcome! If you have any ideas for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
