@@ -19,7 +19,6 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    opacity: .5;
 }
 .postDetails{
     width: 50%;
@@ -33,7 +32,7 @@
     gap: 20px;
     /* justify-content: space-between; */
 }
-.titleInput{
+.titleInput, .authorname{
     width: 95%;
     height: 40px;
     padding: 0 1rem;
@@ -66,3 +65,50 @@
   position: relative;
 }
 
+@media (max-width: 900px){
+    .createPostPage{
+        padding: 2rem 2rem;
+    }
+    .createPostPage h1{
+        font-size: 2rem;
+    }
+    .postDetails{
+        width: 90%;
+        padding: 2rem;
+    }
+    .select{
+        height: 30px;
+    }
+    .titleInput ,.authorname{
+        width: 95%;
+        height: 30px;
+        padding: 0 1rem;
+    }
+    .ql-toolbar .ql-snow{
+        padding: 2px;
+    }
+  }
+
+@media (max-width: 500px){
+    .createPostPage{
+        padding: 2rem 2rem;
+    }
+    .createPostPage h1{
+        font-size: 1.3rem;
+    }
+    .postDetails{
+        width: 90%;
+        padding: 1rem;
+    }
+    .select{
+        height: 30px;
+    }
+    .titleInput ,.authorname{
+        width: 88%;
+        height: 30px;
+        padding: 0 1rem;
+    }
+    .ql-toolbar .ql-snow{
+        padding: 2px;
+    }
+  }

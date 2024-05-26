@@ -27,6 +27,7 @@ const EditPost = ({posts, setPosts}) => {
     const [progress, setProgress] = useState(0)
     const [value, setValue] =  useState("");
     const [titleInput, setTitleInput] = useState('');
+    const [author, setAuthor] = useState("");
     const [category, setCategory] = useState('');
     const [file, setFile] = useState('');
     const navigate = useNavigate();
@@ -41,6 +42,7 @@ const EditPost = ({posts, setPosts}) => {
         const post = posts.find((post) => post.id === parseInt(postId));
         if (post) {
           setTitleInput(post.title);
+          setAuthor(post.author);
           setCategory(post.category);
           setValue(post.content);
           setPrevFile((post.file));
@@ -82,6 +84,7 @@ const EditPost = ({posts, setPosts}) => {
               const updatedPost = {
                 id: parseInt(postId),
                 title: titleInput,
+                author: author,
                 category,
                 content: value,
                 file: data.url,
@@ -102,6 +105,7 @@ const EditPost = ({posts, setPosts}) => {
       
               // Clear form fields and display success message
               setTitleInput("");
+              setAuthor("");
               setCategory("");
               setValue("");
               setFile("");
@@ -188,7 +192,7 @@ const EditPost = ({posts, setPosts}) => {
         <h1>Update your post</h1>
         <div className={Style.postDetails}>
 
-        <input type='text' placeholder='Title' maxLength='20' className={Style.titleInput} onChange={(e) => setTitleInput(e.target.value)} value={titleInput} />
+        <input type='text' placeholder='Title'  className={Style.titleInput} onChange={(e) => setTitleInput(e.target.value)} value={titleInput} />
             <select value={category} onChange={(e) => setCategory(e.target.value)} className={Style.select}>
                 <option value='uncategorized'>Uncategorized</option>
                 <option value='education'>Education</option>
@@ -198,6 +202,14 @@ const EditPost = ({posts, setPosts}) => {
                 <option value='sports'>Sports</option>
                 <option value='fashion'>Fashion</option>
             </select>
+            <input
+          type="text"
+          placeholder="Author name"
+          
+          className={Style.authorname}
+          onChange={(e) => setAuthor(e.target.value)}
+          value={author}
+        />
         <div className={Style.quillDiv}>
         <ReactQuill className={Style.quill}  modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Start writing your blog..." />
 

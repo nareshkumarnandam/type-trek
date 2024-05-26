@@ -5,6 +5,11 @@
     text-align: center;
     padding:  1rem 15rem;
 }
+.postnotfound{
+  position: absolute;
+  top: 40vh;
+  left: 47vw;
+}
 .postDisplay h1{
   font-size: 3rem;
     text-transform: capitalize;
@@ -16,7 +21,10 @@
     justify-content: space-between;
     padding: 0 4rem;
     align-items: center;
-    font-size: 0.8rem;
+    /* font-size: 0.9rem; */
+  }
+  .authorInfo{
+    font-size: 1rem;
   }
   .categoryandtime {
     display: flex;
@@ -27,12 +35,13 @@
   }
   .categoryandtime .category {
     margin: 0;
-    background-color: rgb(43, 43, 43);
-    color: white;
-    padding: 2px 5px;
+    background-color: #494a4a;
+    color: rgb(232, 232, 232);
+    padding: 6px 10px 8px;
     text-align: center;
-    border-radius: 3px;
+    border-radius: 20px;
     text-transform: capitalize;
+    font-size: .8rem;
   }
   .timeCreated {
     background-color: transparent;
@@ -57,6 +66,7 @@
     object-position: center;
   }
   .description{
+    padding: 0rem;
     text-align: left;
   }
   .categoryandtime button{
@@ -71,4 +81,59 @@
   }
   .categoryandtime button:active{
     transform: scale(.95);
+  }
+
+  @media (max-width: 900px){
+    .postDisplay{
+      padding: 1rem;
+    }
+    .postDisplay h1{
+      font-size: 2.2rem;
+        text-transform: capitalize;
+    }
+    .extraInfo{
+      padding: 10px 15px; 
+    }
+    .thumbnail{
+      height: 300px;
+      padding: 1.2rem 0;
+    }
+    .thumbnail img{
+      height: 98%;
+    }
+    .description{
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 500px){
+    .postDisplay{
+      padding: 1rem;
+    }
+    .postDisplay h1{
+      font-size: 2rem;
+        text-transform: capitalize;
+    }
+    .extraInfo{
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .categoryandtime{
+      display: flex;
+      flex-direction: column;
+    }
+    .thumbnail{
+      height: 250px;
+      padding: 1rem 0;
+    }
+    .thumbnail img{
+      height: 95%;
+    }
+    .categoryandtime button{
+      width: 120px;
+    }
+    .description{
+      padding: 0 ;
+    }
   }

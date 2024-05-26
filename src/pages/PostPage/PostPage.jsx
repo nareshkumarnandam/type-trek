@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Style from "./PostPage.module.css";
 import { useParams } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
-import { CiClock1 } from "react-icons/ci";
+import { CiCalendar } from "react-icons/ci";
 import placeholderImage from "../../assets/placeholderImage.jpg";
 import { useNavigate } from "react-router-dom";
 // import { ToastContainer, toast } from "react-toastify";
@@ -26,22 +26,9 @@ const PostPage = ({ posts, setPosts }) => {
   }, []);
 
   const getTimeElapsed = (createdAt) => {
-    const now = new Date().getTime(); // current timestamp in milliseconds
-    const timeElapsed = now - createdAt;
-
-    if (timeElapsed < 60000) {
-      return `${Math.floor(timeElapsed / 1000)} sec ago`;
-    } else if (timeElapsed < 3600000) {
-      return `${Math.floor(timeElapsed / 60000)} min ago`;
-    } else if (timeElapsed < 86400000) {
-      return `${Math.floor(timeElapsed / 3600000)} hr ago`;
-    } else if (timeElapsed < 2592000000) {
-      return `${Math.floor(timeElapsed / 86400000)} d ago`;
-    } else if (timeElapsed < 31104000000) {
-      return `${Math.floor(timeElapsed / 2592000000)} m ago`;
-    } else {
-      return `${Math.floor(timeElapsed / 31104000000)} y ago`;
-    }
+    const dateCreated = new Date(createdAt);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return dateCreated.toLocaleDateString(undefined, options);
   };
 
   const handleDelete = () => {
@@ -68,7 +55,11 @@ const PostPage = ({ posts, setPosts }) => {
   }, [toastMessage]);
 
   if (!post) {
-    return <p className={Style.postDisplay}>Post not found</p>;
+    return (
+      <div className={Style.postnotfound}>
+        <p >Post not found</p>
+      </div>
+    );
   }
 
   return (
@@ -81,12 +72,12 @@ const PostPage = ({ posts, setPosts }) => {
       <Toaster />
       <h1>{post.title}</h1>
       <div className={Style.extraInfo}>
-        <div>
-          <FaRegUser /> Owner
+        <div className={Style.authorInfo}> 
+          <FaRegUser /> {post.author}
         </div>
         <div className={Style.categoryandtime}>
           <p className={Style.timeCreated}>
-            {getTimeElapsed(post.createdAt)} <CiClock1 />{" "}
+            {getTimeElapsed(post.createdAt)} <CiCalendar />{" "}
           </p>
           <p className={Style.category}>{post.category}</p>
           <button

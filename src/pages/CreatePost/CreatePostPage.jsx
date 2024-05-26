@@ -31,6 +31,7 @@ const modules = {
 const CreatePostPage = ({ posts, setPosts }) => {
   const [progress, setProgress] = useState(0);
   const [value, setValue] = useState("");
+  const [author, setAuthor] = useState("");
   const [titleInput, setTitleInput] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
@@ -42,6 +43,7 @@ const CreatePostPage = ({ posts, setPosts }) => {
 
   useEffect(() => {
     localStorage.setItem("posts", JSON.stringify(posts));
+    setPosts(posts.sort((a, b) => b.createdAt - a.createdAt));
   }, [posts]);
 
   useEffect(() => {
@@ -72,6 +74,7 @@ const CreatePostPage = ({ posts, setPosts }) => {
         const newPost = {
             id: posts.length,
             title: titleInput,
+            author: author,
             category,
             content: value,
             file: data.url,
@@ -79,12 +82,13 @@ const CreatePostPage = ({ posts, setPosts }) => {
           };
     
           // Update posts array and localStorage
-          const updatedPosts = [...posts, newPost];
+          const updatedPosts = [...posts, newPost].sort((a, b) => b.createdAt - a.createdAt);
           localStorage.setItem("posts", JSON.stringify(updatedPosts));
           setPosts(updatedPosts);
     
           // Clear form fields and display success message
           setTitleInput("");
+          setAuthor("");
           setCategory("");
           setValue("");
           setImage("");
@@ -148,6 +152,7 @@ const CreatePostPage = ({ posts, setPosts }) => {
     transform: 'translate(-50%, -50%)',
     zIndex: 999,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: '10px'
   }}
   wrapperClass=""
   />
@@ -156,7 +161,7 @@ const CreatePostPage = ({ posts, setPosts }) => {
         <input
           type="text"
           placeholder="Title"
-          maxLength="50"
+          
           className={Style.titleInput}
           onChange={(e) => setTitleInput(e.target.value)}
           value={titleInput}
@@ -173,6 +178,14 @@ const CreatePostPage = ({ posts, setPosts }) => {
           <option value="sports">Sports</option>
           <option value="fashion">Fashion</option>
         </select>
+        <input
+          type="text"
+          placeholder="Author name"
+          
+          className={Style.authorname}
+          onChange={(e) => setAuthor(e.target.value)}
+          value={author}
+        />
         <div className={Style.quillDiv}>
           <ReactQuill
             className={Style.quill}

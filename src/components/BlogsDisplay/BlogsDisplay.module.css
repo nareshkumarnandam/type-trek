@@ -3,7 +3,7 @@
   top: 80px;
   /* width: 100%; */
   text-align: center;
-  padding: 2rem 4rem;
+  padding: 2rem 3rem;
   display: flex;
   flex-wrap: wrap;
   /* justify-content: center; */
@@ -21,7 +21,7 @@
   border: 1px solid #ccc;
   background: #fff;
   float: left;
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
 }
 .blogCard:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
@@ -39,7 +39,7 @@
   object-position: center;
 }
 .postInfo {
-  height: 33%;
+  height: 40%;
   width: 95%;
   margin: 5px 20px;
   display: flex;
@@ -51,6 +51,7 @@
   text-align: left;
   width: 100%;
   text-transform: capitalize;
+  font-size: 1rem;
   /* overflow: hidden; */
   word-wrap: break-word;
   /* height: auto; */
@@ -60,7 +61,7 @@
   margin: 0;
 }
 .description {
-    width: 100%;
+  width: 100%;
   text-align: left;
   font-size: 0.8rem;
   /* overflow-wrap: break-word; */
@@ -70,15 +71,19 @@
   height: 80%;
 }
 .noData {
-  width: 100%;
+  /* width: 100%; */
+  position: absolute;
+  top: 30vh;
+  left: 47vw;
 }
 .extraInfo {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 5px;
   align-items: center;
   font-size: 0.8rem;
+  height: 10%;
 }
 .categoryandtime {
   display: flex;
@@ -87,7 +92,7 @@
   width: auto;
   gap: 5px;
 }
-.categoryandtime .category {
+.category {
   margin: 0;
   background-color: rgb(43, 43, 43);
   color: white;
@@ -95,6 +100,7 @@
   text-align: center;
   border-radius: 3px;
   text-transform: capitalize;
+  font-size: 0.7rem;
 }
 .timeCreated {
   background-color: transparent;
@@ -105,4 +111,67 @@
   position: relative;
   top: 3px;
   font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .blogDisplay {
+    padding: 2rem 2rem;
+    display: flex;
+    gap: 10px;
+    position: relative;
+    /* left: 10%; */
+    /* justify-content: center; */
+  }
+  .blogCard {
+    width: 200px;
+    height: 250px;
+  }
+  .blogimage {
+    width: 230px;
+    height: 50%;
+    object-fit: cover;
+  }
+  .blogimage img {
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    object-position: center;
+  }
+  .postInfo h3 {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 500px) {
+    .noData{
+        left: 35%;
+    }
+  .blogDisplay {
+    padding: 2rem 1rem;
+    display: flex;
+    gap: 10px;
+    position: relative;
+    /* left: 10%; */
+    justify-content: center;
+  }
+  .blogCard {
+    width: 250px;
+    height: 300px;
+  }
+  .blogimage {
+    width: 280px;
+    height: 50%;
+    object-fit: cover;
+  }
+  .blogimage img {
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    object-position: center;
+  }
+  .postInfo h3 {
+    font-size: 1rem;
+  }
 }

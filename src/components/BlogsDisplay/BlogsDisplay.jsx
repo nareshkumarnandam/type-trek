@@ -42,7 +42,9 @@ const BlogsDisplay = ({posts, setPosts}) => {
   return (
     <div className={Style.blogDisplay}>
       {posts.length === 0 ? (
-        <p className={Style.noData}>No blogs created</p>
+        <div  className={Style.noData}>
+            <p>No blogs created</p>
+        </div>
       ) : (
         posts.map((post, index) => (
           <div onClick={() => navigate(`/postPage/${post.id}/${post.title}`)} key={index} className={Style.blogCard}>
@@ -62,26 +64,27 @@ const BlogsDisplay = ({posts, setPosts}) => {
               </div>
             )}
             <div className={Style.postInfo}>
+            <p className={Style.category}>{post.category}</p>
               <h3>{post.title}</h3>
 
-              <div
+              {/* <div
                 className={Style.description}
                 dangerouslySetInnerHTML={{ __html: post.content }}
               >
-                {/* {DOMPurify.sanitize(post.content)} */}
-                {/* <p>{DOMPurify.sanitize(post.content).replace(/<[^>]+>/g, '')}</p> */}
-              </div>
+                {DOMPurify.sanitize(post.content)}
+                <p>{DOMPurify.sanitize(post.content).replace(/<[^>]+>/g, '')}</p>
+              </div> */}
             </div>
 
             <div className={Style.extraInfo}>
               <div>
-                <FaRegUser /> Owner
+                <FaRegUser /> {post.author}
               </div>
               <div className={Style.categoryandtime}>
                 <p className={Style.timeCreated}>
                   {getTimeElapsed(post.createdAt)} <CiClock1 />{" "}
                 </p>
-                <p className={Style.category}>{post.category}</p>
+                
               </div>
             </div>
           </div>
