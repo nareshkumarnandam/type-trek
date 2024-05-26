@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Style from "./BlogsDisplay.module.css";
 import { FaRegUser } from "react-icons/fa";
 import { CiClock1 } from "react-icons/ci";
-import data from "../../data";
 import placeholderImage from '../../assets/placeholderImage.jpg'
 import { useNavigate } from "react-router-dom";
 
@@ -50,7 +49,7 @@ const BlogsDisplay = ({posts, setPosts}) => {
             {post.file !== null || post.file !== undefined ? (
               <div className={Style.blogimage}>
                 <img
-                  src={post.downloadUrl}
+                  src={post.file}
                   alt={post.title}
                 />
               </div>

@@ -6,6 +6,7 @@ import data from './data';
 import CreatePostPage from './pages/CreatePost/CreatePostPage';
 import Navbar from './components/Navbar/Navbar';
 import PostPage from './pages/PostPage/PostPage';
+import EditPost from './pages/EditPost/EditPost';
 
 function App() {
   const [posts, setPosts] = useState(data);
@@ -19,6 +20,7 @@ function App() {
       <Route path='/' element={<Home posts={posts} setPosts={setPosts} />} />
       <Route path='/create-post' element={<CreatePostPage posts={posts} setPosts={setPosts} />} />
       <Route path='/postPage/:id/:title' element={<PostPage posts={posts} setPosts={setPosts} />}/>
+      <Route path='/editpost/:id/:title' element={<EditPost posts={posts} setPosts={setPosts} />} />
     </Routes>
     </BrowserRouter>
   );

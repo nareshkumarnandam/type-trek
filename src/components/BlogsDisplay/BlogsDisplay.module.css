@@ -51,15 +51,16 @@
   text-align: left;
   width: 100%;
   text-transform: capitalize;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: auto;
+  /* overflow: hidden; */
+  word-wrap: break-word;
+  /* height: auto; */
 }
 .postInfo h3,
 .postInfo p {
   margin: 0;
 }
 .description {
+    width: 100%;
   text-align: left;
   font-size: 0.8rem;
   /* overflow-wrap: break-word; */

@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import Style from './CreatePostPage.module.css'
 import  ReactQuill  from  "react-quill";
 import  "react-quill/dist/quill.snow.css";
-import data from '../../data';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,10 +31,7 @@ const CreatePostPage = ({posts, setPosts}) => {
     const navigate = useNavigate();
     const [toastMessage, setToastMessage] = useState('');
     console.log(file)
-    // console.log(category);
-    // console.log(titleInput);
-    // console.log(value);
-    // console.log(posts);
+    
 
     useEffect(() => {
       localStorage.setItem('posts', JSON.stringify(posts));
@@ -51,26 +47,15 @@ const CreatePostPage = ({posts, setPosts}) => {
     
 
     function handleUpload(){
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64String = reader.result;
+          const downloadUrl = URL.createObjectURL(file);
           const newPost = {
             id: posts.length,
             title: titleInput,
             category,
             content: value,
-            file: base64String,
+            file: downloadUrl,
             createdAt: Date.now(),
           };
-    
-          // Convert the Base64 encoded string to a Blob object
-          const blob = dataURItoBlob(base64String);
-    
-          // Generate a downloadable URL for the Blob object
-          const downloadUrl = URL.createObjectURL(blob);
-    
-          // Store the download URL in the new post object
-          newPost.downloadUrl = downloadUrl;
     
           const updatedPosts = [...posts, newPost];
     
@@ -83,8 +68,7 @@ const CreatePostPage = ({posts, setPosts}) => {
           setValue('');
           setFile('');
           setToastMessage('Post created successfully!');
-        };
-        reader.readAsDataURL(file);
+        
     }
 
     useEffect(() => {
@@ -112,7 +96,7 @@ const CreatePostPage = ({posts, setPosts}) => {
         <h1>Create new post</h1>
         <div className={Style.postDetails}>
 
-        <input type='text' placeholder='Title' maxLength='20' className={Style.titleInput} onChange={(e) => setTitleInput(e.target.value)} value={titleInput} />
+        <input type='text' placeholder='Title' maxLength='50' className={Style.titleInput} onChange={(e) => setTitleInput(e.target.value)} value={titleInput} />
             <select onChange={(e) => setCategory(e.target.value)} className={Style.select}>
                 <option value='uncategorized'>Uncategorized</option>
                 <option value='education'>Education</option>
@@ -135,16 +119,7 @@ const CreatePostPage = ({posts, setPosts}) => {
   )
 }
 
-function dataURItoBlob(dataURI) {
-    const byteString = atob(dataURI.split(',')[1]);
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const uint8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      uint8Array[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([arrayBuffer], { type: mimeString });
-  }
+
   
 
 export default CreatePostPage

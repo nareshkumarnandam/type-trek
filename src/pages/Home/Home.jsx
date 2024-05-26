@@ -23,12 +23,12 @@ const Home = ({posts, setPosts}) => {
   //   localStorage.setItem('posts', JSON.stringify(posts));
   // }, [posts]);
 
-  // useEffect(() => {
-  //   const storedPosts = localStorage.getItem('posts');
-  //   if (storedPosts) {
-  //     setPosts(JSON.parse(storedPosts));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const storedPosts = localStorage.getItem('posts');
+    if (storedPosts) {
+      setPosts(JSON.parse(storedPosts));
+    }
+  }, []);
   return (
     <div>
         <LoadingBar color="#f11946" progress={progress} onLoaderFinished={() => setProgress(0)} />
