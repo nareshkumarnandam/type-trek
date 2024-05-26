@@ -51,27 +51,40 @@ const CreatePostPage = ({posts, setPosts}) => {
     
 
     function handleUpload(){
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result;
-        const newPost = {
-          id: posts.length,
-          title: titleInput,
-          category,
-          content: value,
-          file: base64String,
-          createdAt: Date.now(),
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64String = reader.result;
+          const newPost = {
+            id: posts.length,
+            title: titleInput,
+            category,
+            content: value,
+            file: base64String,
+            createdAt: Date.now(),
+          };
+    
+          // Convert the Base64 encoded string to a Blob object
+          const blob = dataURItoBlob(base64String);
+    
+          // Generate a downloadable URL for the Blob object
+          const downloadUrl = URL.createObjectURL(blob);
+    
+          // Store the download URL in the new post object
+          newPost.downloadUrl = downloadUrl;
+    
+          const updatedPosts = [...posts, newPost];
+    
+          localStorage.setItem('posts', JSON.stringify(updatedPosts));
+
+          setPosts(updatedPosts);
+    
+          setTitleInput('');
+          setCategory('');
+          setValue('');
+          setFile('');
+          setToastMessage('Post created successfully!');
         };
-        setPosts([...posts, newPost]);
-        localStorage.setItem('posts', JSON.stringify(posts));
-        // reset the state values
-        setTitleInput('');
-        setCategory('');
-        setValue('');
-        setFile('');
-        setToastMessage('Post created successfully!');
-      };
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
     }
 
     useEffect(() => {
@@ -121,5 +134,17 @@ const CreatePostPage = ({posts, setPosts}) => {
     </div>
   )
 }
+
+function dataURItoBlob(dataURI) {
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      uint8Array[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([arrayBuffer], { type: mimeString });
+  }
+  
 
 export default CreatePostPage

@@ -34,14 +34,10 @@ const PostPage = ({posts, setPosts}) => {
         }
       };
 
-      const getFileFromLocalStorage = (postId) => {
-        const storedFiles = localStorage.getItem('files');
-        if (storedFiles) {
-          const files = JSON.parse(storedFiles);
-          const file = files.find((file) => file.postId === postId);
-          return file;
-        }
-        return null;
+      const handleDelete = () => {
+        const updatedPosts = posts.filter((post) => post.id !== parseInt(id));
+        setPosts(updatedPosts);
+        localStorage.setItem('posts', JSON.stringify(updatedPosts));
       };
       
   
@@ -61,12 +57,14 @@ const PostPage = ({posts, setPosts}) => {
                   {getTimeElapsed(post.createdAt)} <CiClock1 />{" "}
                 </p>
                 <p className={Style.category}>{post.category}</p>
+                <button>Edit</button>
+                <button onClick={handleDelete}>Delete</button>
               </div>
             </div>
             {post.file !== null || post.file !== undefined ? (
               <div className={Style.thumbnail}>
                 <img
-                  src={getFileFromLocalStorage(post.id) ? URL.createObjectURL(getFileFromLocalStorage(post.id).file) : placeholderImage}
+                  src={post.downloadUrl}
                   alt={post.title}
                 />
               </div>

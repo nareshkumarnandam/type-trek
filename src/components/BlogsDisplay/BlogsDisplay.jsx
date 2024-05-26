@@ -36,15 +36,7 @@ const BlogsDisplay = ({posts, setPosts}) => {
       return `${Math.floor(timeElapsed / 31104000000)} y ago`;
     }
   };
-  const getFileFromLocalStorage = (postId) => {
-    const storedFiles = localStorage.getItem('files');
-    if (storedFiles) {
-      const files = JSON.parse(storedFiles);
-      const file = files.find((file) => file.postId === postId);
-      return file;
-    }
-    return null;
-  };
+  
 
   console.log(posts);
 
@@ -58,7 +50,7 @@ const BlogsDisplay = ({posts, setPosts}) => {
             {post.file !== null || post.file !== undefined ? (
               <div className={Style.blogimage}>
                 <img
-                  src={getFileFromLocalStorage(post.id) ? URL.createObjectURL(getFileFromLocalStorage(post.id).file) : placeholderImage}
+                  src={post.downloadUrl}
                   alt={post.title}
                 />
               </div>
