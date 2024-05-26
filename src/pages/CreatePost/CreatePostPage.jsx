@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingBar from "react-top-loading-bar";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { v4 as uuidv4 } from "uuid";
+import { TailSpin } from 'react-loader-spinner'
 
 // const cld = new Cloudinary({
 //     cloud: {
@@ -38,6 +37,7 @@ const CreatePostPage = ({ posts, setPosts }) => {
   const [fileUrl, setFileUrl] = useState("");
   const navigate = useNavigate();
   const [toastMessage, setToastMessage] = useState("");
+  const [spinLoader, setSpinLoader] = useState(false);
   // console.log(file)
 
   useEffect(() => {
@@ -53,6 +53,7 @@ const CreatePostPage = ({ posts, setPosts }) => {
   // console.log(fileUrl);
 
   function handleUpload() {
+    setSpinLoader(true);
     if (image === null || image === undefined || image === "") {
         handleUpdateWithoutFile();
       }else{
@@ -88,9 +89,11 @@ const CreatePostPage = ({ posts, setPosts }) => {
           setValue("");
           setImage("");
           setToastMessage("Post created successfully!");
+          setSpinLoader(false);
       })
       .catch((err) => {
         console.log(err);
+        setSpinLoader(false);
       });
 
       }
@@ -102,7 +105,7 @@ const CreatePostPage = ({ posts, setPosts }) => {
     toast.error("Please upload a file", {
         autoClose: 3000, // 5 seconds
       });
-    
+      setSpinLoader(false);
   };
 
   useEffect(() => {
@@ -124,13 +127,30 @@ const CreatePostPage = ({ posts, setPosts }) => {
   // console.log(posts);
 
   return (
-    <div className={Style.createPostPage}>
+    <div className={spinLoader ? Style.createPostPagelight : Style.createPostPage}>
       <LoadingBar
         color="#f11946"
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
       <ToastContainer />
+      <TailSpin id="spinner" className
+  visible={spinLoader}
+  height="80"
+  width="80"
+  color="#f11946"
+  ariaLabel="tail-spin-loading"
+  radius="1"
+  wrapperStyle={{
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 999,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  }}
+  wrapperClass=""
+  />
       <h1>Create new post</h1>
       <div className={Style.postDetails}>
         <input

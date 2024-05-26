@@ -5,7 +5,8 @@ import  "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from 'react-top-loading-bar';
+import { TailSpin } from 'react-loader-spinner'
 
 const  modules  = {
     toolbar: [
@@ -33,6 +34,7 @@ const EditPost = ({posts, setPosts}) => {
     const postId = useParams().id;
     const fileInputRef = useRef(null);
     const [prevFile, setPrevFile] = useState('');
+    const [spinLoader, setSpinLoader] = useState(false);
     console.log(file)
     
     useEffect(() => {
@@ -61,6 +63,7 @@ const EditPost = ({posts, setPosts}) => {
     }, []);
 
     const handleUpdate = () => {
+        setSpinLoader(true);
         if (file === null || file === undefined || file === "") {
           handleUpdateWithoutFile();
         } else {
@@ -103,9 +106,11 @@ const EditPost = ({posts, setPosts}) => {
               setValue("");
               setFile("");
               setToastMessage("Post updated successfully!");
+              setSpinLoader(false);
             })
             .catch((err) => {
               console.log(err);
+              setSpinLoader(false);
             });
         }
       };
@@ -114,7 +119,7 @@ const EditPost = ({posts, setPosts}) => {
         toast.error("Please upload a file", {
             autoClose: 3000, // 5 seconds
           });
-        
+          setSpinLoader(false);
       };
     
       function dataURItoBlob(dataURI) {
@@ -156,11 +161,30 @@ const EditPost = ({posts, setPosts}) => {
             }, 200);
           }
       }, [toastMessage]);
+      
 
   return (
     <div className={Style.createPostPage}>
         <LoadingBar color="#f11946" progress={progress} onLoaderFinished={() => setProgress(0)} />
         <ToastContainer />
+        <TailSpin id="spinner" className
+  visible={spinLoader}
+  height="80"
+  width="80"
+  color="#f11946"
+  ariaLabel="tail-spin-loading"
+  radius="1"
+  wrapperStyle={{
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 999,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: '10px' 
+  }}
+  wrapperClass=""
+  />
         <h1>Update your post</h1>
         <div className={Style.postDetails}>
 
