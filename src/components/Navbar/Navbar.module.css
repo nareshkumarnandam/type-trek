@@ -17,6 +17,16 @@
 }
 .logo{
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.logo img{
+    width: 25px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 1px;
 }
 .dropDownBtn, .createPostBtn{
     background: #000;

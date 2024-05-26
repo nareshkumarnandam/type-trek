@@ -61,51 +61,58 @@ const EditPost = ({posts, setPosts}) => {
     }, []);
 
     const handleUpdate = () => {
-        if(file === null || file === undefined || file === ''){
+        if (file === null || file === undefined || file === "") {
           handleUpdateWithoutFile();
         } else {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const base64String = reader.result;
-            const updatedPost = {
-              id: parseInt(postId),
-              title: titleInput,
-              category,
-              content: value,
-              file: base64String,
-              createdAt: Date.now(),
-            };
-    
-            // Convert the Base64 encoded string to a Blob object
-            const blob = dataURItoBlob(base64String);
-    
-            // Generate a downloadable URL for the Blob object
-            const downloadUrl = URL.createObjectURL(blob);
-    
-            // Store the downloadable URL in the updated post object
-            updatedPost.downloadUrl = downloadUrl;
-    
-            const updatedPosts = posts.map((post) => {
-              if (post.id === parseInt(postId)) {
-                return updatedPost;
-              } else {
-                return post;
-              }
+          const data = new FormData();
+          data.append("file", file);
+          data.append("upload_preset", "blogapp");
+          data.append("cloud_name", "dbur5zq1d");
+          fetch("https://api.cloudinary.com/v1_1/dbur5zq1d/image/upload", {
+            method: "POST",
+            body: data,
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data.url);
+              // Create a new post object with the file URL
+              const updatedPost = {
+                id: parseInt(postId),
+                title: titleInput,
+                category,
+                content: value,
+                file: data.url,
+                createdAt: Date.now(),
+              };
+      
+              // Update posts array and localStorage
+              const updatedPosts = posts.map((post) => {
+                if (post.id === parseInt(postId)) {
+                  return updatedPost;
+                } else {
+                  return post;
+                }
+              });
+      
+              localStorage.setItem("posts", JSON.stringify(updatedPosts));
+              setPosts(updatedPosts);
+      
+              // Clear form fields and display success message
+              setTitleInput("");
+              setCategory("");
+              setValue("");
+              setFile("");
+              setToastMessage("Post updated successfully!");
+            })
+            .catch((err) => {
+              console.log(err);
             });
-    
-            localStorage.setItem('posts', JSON.stringify(updatedPosts));
-    
-            setPosts(updatedPosts);
-    
-            setToastMessage('Post updated successfully!');
-          };
-          reader.readAsDataURL(file);
         }
       };
-    
+      
       const handleUpdateWithoutFile = () => {
         toast.error("Please upload a file", {
-            autoClose: 5000, // 5 seconds
+            autoClose: 3000, // 5 seconds
           });
         
       };
@@ -171,7 +178,7 @@ const EditPost = ({posts, setPosts}) => {
         <ReactQuill className={Style.quill}  modules={modules} theme="snow" value={value} onChange={setValue} placeholder="Start writing your blog..." />
 
         </div>
-        <input onChange={(e) => setFile(e.target.files[0])} className={Style.fileInput} type='file' accept='png, jpg, jpeg, mp4' />
+        <input onChange={(e) => setFile(e.target.files[0])} className={Style.fileInput} type='file' accept='png, jpg, jpeg' />
         <button onClick={handleUpdate} className={Style.postBtn} type='submit'>
             Update
         </button>

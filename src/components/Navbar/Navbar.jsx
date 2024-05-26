@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import Style from "./Navbar.module.css";
 import DropDown from "../DropDown/DropDown";
 import { useNavigate } from "react-router-dom";
+import { PiLetterCircleVDuotone } from "react-icons/pi";
+import v from '../../assets/v.png';
 
 const Navbar = () => {
     const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -17,16 +19,16 @@ const Navbar = () => {
   return (
     <div className={Style.navbar}>
       <div>
-        <h1 className={Style.logo} onClick={() => navigate('/')}>TypeTrek</h1>
+        <h1 className={Style.logo} onClick={() => navigate('/')}><img src={v} />Blog</h1>
       </div>
       <div className={Style.options}>
-        <div  onMouseEnter={handleMouseEnter}
+        {/* <div  onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}>
         <button  className={Style.dropDownBtn}>Categories</button>
         <div className={Style.dropdownMenu}>
         {isDropdownVisible && <DropDown />}
         </div>
-      </div>
+      </div> */}
       <div>
             <button onClick={() => navigate('/create-post')} className={Style.createPostBtn}>Create Post</button>
         </div>
